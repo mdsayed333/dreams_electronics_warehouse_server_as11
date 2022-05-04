@@ -19,6 +19,7 @@ async function run(){
         const productsCollection = client.db("dreams-electronics").collection("products");
         console.log('Mongo is Running');
 
+            // find all products
         app.get('/products', async(req, res) => {
             const query = {};
             const cursor = productsCollection.find(query);
@@ -26,13 +27,20 @@ async function run(){
             res.send(products);
         });
 
+            // Find Product Details
         app.get('/product/:id', async(req, res) => {
             const id = req.params.id;
             const query = {_id: ObjectId(id)};
             const product = await productsCollection.findOne(query);
-            
             res.send(product);
         });
+            
+            // Add a new Product
+        app.post('/product', async(req, res) => {
+            const newProduct = req.body;
+            const result = await productsCollection.insertOne(newProduct);
+            res.send(result);
+        })
 
     }
     finally{
