@@ -83,15 +83,13 @@ async function run() {
       res.send(orders);
     });
 
-    // get data for monthly report
+    // get data for monthly
     app.get("/report", async (req, res) => {
       const query = {};
       const cursor = monthlyReport.find(query);
       const reports = await cursor.toArray();
       res.send(reports);
     });
-
-
   } finally {
     // client.close();
   }
