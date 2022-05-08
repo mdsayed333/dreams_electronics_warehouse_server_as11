@@ -21,6 +21,10 @@ async function run() {
       .db("dreams-electronics")
       .collection("products");
 
+    const monthlyReport = client
+      .db("dreams-electronics")
+      .collection("monthly-report");
+
     // find all products
     app.get("/products", async (req, res) => {
       const query = {};
@@ -78,6 +82,16 @@ async function run() {
       console.log("Orders: ", orders);
       res.send(orders);
     });
+
+    // get data for monthly report
+    app.get("/report", async (req, res) => {
+      const query = {};
+      const cursor = monthlyReport.find(query);
+      const reports = await cursor.toArray();
+      res.send(reports);
+    });
+
+
   } finally {
     // client.close();
   }
