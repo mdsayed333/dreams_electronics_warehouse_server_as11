@@ -97,9 +97,9 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
-  res.send("Dreams server is running...");
+  res.send("Dreams Electronics server is running...");
 });
 
 app.listen(port, () => {
-  console.log("Dreams Server Port: ", port);
+  console.log("Dreams Electronics Server Port: ", port);
 });
